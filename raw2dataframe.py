@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 
-
-
-
 __author__ = "Simon Filhol"
 __date__ = "22 April 2016"
 __copyright__ = "Copyright 2016"
@@ -10,16 +7,41 @@ __license__ = "GNU GPL v3"
 __version__ = "1.0"
 __email__ = "svfilhol@alaska.edu"
 
+'''
+Script to:
+
+1 - Extract relevant information (time, location, depth) from magnaprobe
+file after basic cleaning and saved as .csv with first and 2nd line removed.
+
+2 - Convert lat/long to UTM (6N by default) coordinate system.
+
+3 - Save the data to a new file readable directly with plotting functions.
+
+
+Feature to add
+   - find out how to add metadata to final file or use Pickle to save files
+   - structure next version to for running script from terminal based on arguments
+'''
+
 import pyproj as pj
 import pandas as pd
-import matplotlib.pyplot as plt
-from matplotlib import gridspec
 
 
-# Feature to add
-#   - include the datetime column in final file
-#   - find out how to add metadata to final file
-#   - structure next version to for running script from terminal based on arguments
+def raw2csv():
+
+class magna_data(object):
+    def __init__(self):
+        self.depth =
+        self.north =
+        self.east =
+        self.lat =
+        self.long =
+        self.snowdepth =
+        self.date =
+        self.pointID =
+        self.timestamp =
+        self.
+
 
 
 # open clean magnaprobe data
@@ -40,21 +62,3 @@ dfinal['east_utm_m'] = x_utm
 dfinal['snowdepth_cm'] = data['DepthCm']
 
 dfinal.to_csv('magna_probe_data_here.csv')
-
-# plot data
-fig = plt.figure(figsize=(8, 6))
-gs = gridspec.GridSpec(5, 1)
-ax0 = plt.subplot(gs[0:4])
-pl = ax0.scatter(x_utm, y_utm , c=data['DepthCm'], s=50, edgecolor='none')
-fig.colorbar(pl,  orientation='vertical')
-ax1 = plt.subplot(gs[4])
-ax1.hist(data['DepthCm'], bins=25)
-ax0.set_title('Snow depth Map (cm)')
-ax1.set_title('Snow Depth Histogram (cm)')
-
-plt.tight_layout()
-
-
-
-
-
